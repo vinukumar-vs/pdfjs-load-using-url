@@ -1,0 +1,24 @@
+{
+  "name": "pdfjs-sample",
+  "version": "1.0.0",
+  "description": "PDF file to render using url",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinukumar-vs/pdfjs-load-using-url.git"
+  },
+  "keywords": [
+    "pdfjs",
+    "pdf",
+    "sample"
+  ],
+  "author": "Vinu Kumar V S",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vinukumar-vs/pdfjs-load-using-url/issues"
+  },
+  "homepage": "https://github.com/vinukumar-vs/pdfjs-load-using-url#readme"
+}
