@@ -68,17 +68,45 @@ export class PdfViewComponent implements OnInit {
       //   viewport,
       // };
 
-      let scale = 1.5;
-      let viewport = page.getViewport(scale);
-      // let textLayerDiv: any = document.getElementById("page_1");
-      let canvas: any = document.getElementById('main-canvas');
-      let context = canvas.getContext('2d');
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-      let renderContext = {
+
+      // Solution 2
+      // ref: https://mozilla.github.io/pdf.js/examples/index.html#rendering-the-page
+      var scale = 2;
+      var viewport = page.getViewport(scale);
+      // Support HiDPI-screens.
+      var outputScale = window.devicePixelRatio || 1;
+
+      var canvas: any = document.getElementById('main-canvas');
+      var context = canvas.getContext('2d');
+
+      canvas.width = Math.floor(viewport.width * outputScale);
+      canvas.height = Math.floor(viewport.height * outputScale);
+      canvas.style.width = Math.floor(viewport.width) + "px";
+      canvas.style.height =  Math.floor(viewport.height) + "px";
+
+      var transform = outputScale !== 1
+        ? [outputScale, 0, 0, outputScale, 0, 0]
+        : null;
+
+      var renderContext = {
         canvasContext: context,
+        transform: transform,
         viewport: viewport
       };
+
+      // // Solution 3
+      // // Default solution - Working
+      // let scale = 1.5;
+      // let viewport = page.getViewport(scale);
+      // // let textLayerDiv: any = document.getElementById("page_1");
+      // let canvas: any = document.getElementById('main-canvas');
+      // let context = canvas.getContext('2d');
+      // canvas.height = viewport.height;
+      // canvas.width = viewport.width;
+      // let renderContext = {
+      //   canvasContext: context,
+      //   viewport: viewport
+      // };
       page.render(renderContext);
 
       page.getTextContent().then(function (textContent) {
